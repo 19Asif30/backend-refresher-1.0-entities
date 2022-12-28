@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Column } from "typeorm";
+import { Column, OneToMany } from "typeorm";
 import { Entity } from "typeorm/decorator/entity/Entity";
+import { Content } from "./content.entity";
 import { EntityBase } from "./entityBase";
+import { ContentDto } from "../../../backendrefresher-1.0-dtos/src/dtos/content.dto"
 
-// eslint-disable-next-line prettier/prettier
+
 @Entity()
-export class User extends EntityBase{
+export class User extends EntityBase {
 
     @Column()
     firstname: string;
@@ -21,6 +23,9 @@ export class User extends EntityBase{
 
     @Column()
     password: string;
+
+    @OneToMany(() => Content, content => content.user)
+    contents: ContentDto[];
 
 
 
